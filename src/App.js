@@ -1,6 +1,7 @@
 import { useDispatch } from 'react-redux';
 import { createFile } from './actions/FileActions';
 import { useRef } from 'react';
+import DwgViewer from './components/DwgViewer';
 
 
 function App() {
@@ -13,12 +14,17 @@ function App() {
   }
 
   return (
+    <>
     <div className="App">
         <form onSubmit={handleFileSubmit}>
-            <input type="file" ref={inputRef} name="file" onChange={handleFileSubmit} />
+            <input type="file" ref={inputRef} name="file" />
             <button type="submit">upload</button>
         </form>
     </div>
+    <div>
+      <DwgViewer/>
+    </div>
+    </>
   );
 }
 
