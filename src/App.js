@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch } from 'react-redux';
+import { createFile } from './actions/FileActions';
+import { useRef } from 'react';
+
 
 function App() {
+  const dispatch = useDispatch();
+  const inputRef = useRef(null);
+  const handleFileSubmit = (e) => {
+      e.preventDefault();
+      const file = inputRef.current.files[0];
+      dispatch(createFile(file));
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <form onSubmit={handleFileSubmit}>
+            <input type="file" ref={inputRef} name="file" onChange={handleFileSubmit} />
+            <button type="submit">upload</button>
+        </form>
     </div>
   );
 }
+
+
 
 export default App;
